@@ -1,0 +1,205 @@
+- generic [ref=f3e3]:
+  - generic [ref=f3e4]:
+    - link "Skip to main content" [ref=f3e15] [cursor=pointer]:
+      - /url: "#pageContent"
+    - generic [ref=f3e17]:
+      - generic [ref=f3e18]:
+        - generic [ref=f3e19]:
+          - link [ref=f3e20] [cursor=pointer]:
+            - /url: /
+            - img "Grafana" [ref=f3e21]
+          - link "Grafana" [ref=f3e22] [cursor=pointer]:
+            - /url: /
+        - button "Close menu" [ref=f3e23] [cursor=pointer]
+      - navigation "Navigation" [ref=f3e26]:
+        - list "Navigation" [ref=f3e31]:
+          - listitem [ref=f3e32]:
+            - generic [ref=f3e33]:
+              - link [ref=f3e36] [cursor=pointer]:
+                - /url: /dashboards?starred
+                - paragraph [ref=f3e41]: Starred
+              - 'button "Expand section: Starred" [ref=f3e43] [cursor=pointer]'
+          - listitem [ref=f3e46]:
+            - generic [ref=f3e47]:
+              - link [ref=f3e50] [cursor=pointer]:
+                - /url: /dashboards
+                - paragraph [ref=f3e55]: Dashboards
+              - 'button "Expand section: Dashboards" [ref=f3e57] [cursor=pointer]'
+          - listitem [ref=f3e60]:
+            - link [ref=f3e64] [cursor=pointer]:
+              - /url: /explore
+              - paragraph [ref=f3e69]: Explore
+          - listitem [ref=f3e70]:
+            - generic [ref=f3e71]:
+              - link [ref=f3e74] [cursor=pointer]:
+                - /url: /drilldown
+                - paragraph [ref=f3e82]: Drilldown
+              - 'button "Expand section: Drilldown" [ref=f3e84] [cursor=pointer]'
+          - listitem [ref=f3e87]:
+            - generic [ref=f3e88]:
+              - link [ref=f3e91] [cursor=pointer]:
+                - /url: /alerting
+                - paragraph [ref=f3e96]: Alerting
+              - 'button "Expand section: Alerting" [ref=f3e98] [cursor=pointer]'
+          - listitem [ref=f3e101]:
+            - generic [ref=f3e102]:
+              - link [ref=f3e105] [cursor=pointer]:
+                - /url: /connections
+                - paragraph [ref=f3e110]: Connections
+              - 'button "Expand section: Connections" [ref=f3e112] [cursor=pointer]'
+          - listitem [ref=f3e115]:
+            - generic [ref=f3e116]:
+              - link [ref=f3e119] [cursor=pointer]:
+                - /url: /admin
+                - paragraph [ref=f3e124]: Administration
+              - 'button "Expand section: Administration" [ref=f3e126] [cursor=pointer]'
+        - separator [ref=f3e129]
+        - button "Undock menu" [ref=f3e131] [cursor=pointer]
+    - banner [ref=f3e134]:
+      - generic [ref=f3e135]:
+        - navigation "Breadcrumbs" [ref=f3e137]:
+          - list [ref=f3e138]:
+            - listitem [ref=f3e139]:
+              - link "Dashboards" [ref=f3e140] [cursor=pointer]:
+                - /url: /dashboards
+            - listitem [ref=f3e144]:
+              - 'generic "ai-context adapter: tool latency per project" [ref=f3e145]'
+        - generic [ref=f3e146]:
+          - generic [ref=f3e148]:
+            - button "Search..." [ref=f3e152] [cursor=pointer]
+            - generic [ref=f3e153]: ⌘+k
+          - button "New" [ref=f3e155] [cursor=pointer]
+          - button "Help" [ref=f3e161] [cursor=pointer]
+          - link "Sign in" [ref=f3e165] [cursor=pointer]:
+            - /url: /d/ai-context-adapter/ai-context-adapter3a-tool-latency-per-project?from=now-7d&to=now&timezone=browser&var-resolution=$__auto&var-project=$__all&var-tool=$__all&var-group=tool&refresh=10s&forceLogin=true
+    - main [ref=f3e7]:
+      - generic [ref=f3e167]:
+        - generic [ref=f3e169]:
+          - generic [ref=f3e170]:
+            - generic [ref=f3e171]:
+              - generic [ref=f3e172]:
+                - button "Move 3d 12h backward" [ref=f3e173] [cursor=pointer]
+                - 'button "Time range selected: Last 7 days" [ref=f3e176] [cursor=pointer]':
+                  - generic [ref=f3e179]: Last 7 days
+                - button "Move time range forwards" [ref=f3e184] [cursor=pointer]
+                - button "Zoom out time range" [ref=f3e187] [cursor=pointer]
+              - generic [ref=f3e190]:
+                - button "Refresh" [ref=f3e191] [cursor=pointer]
+                - button "Choose refresh time interval with current interval 10 seconds selected" [ref=f3e197] [cursor=pointer]:
+                  - generic [ref=f3e198]: 10s
+            - generic [ref=f3e201]:
+              - generic [ref=f3e202]:
+                - button "Copy link" [ref=f3e203] [cursor=pointer]
+                - button "Share" [ref=f3e206] [cursor=pointer]
+              - button "Enter edit mode" [ref=f3e209] [cursor=pointer]:
+                - generic [ref=f3e212]: Edit
+          - generic [ref=f3e213]:
+            - generic [ref=f3e214]: Projects
+            - generic [ref=f3e215] [cursor=pointer]:
+              - log [ref=f3e217]
+              - generic [ref=f3e218]:
+                - generic [ref=f3e219]:
+                  - generic [ref=f3e220]:
+                    - generic [ref=f3e221]: All
+                    - button "Remove" [ref=f3e222]
+                  - combobox "Projects" [ref=f3e226]
+                - button "Clear value" [ref=f3e228]
+          - generic [ref=f3e232]:
+            - generic [ref=f3e233]: Tool
+            - generic [ref=f3e234] [cursor=pointer]:
+              - log [ref=f3e236]
+              - generic [ref=f3e237]:
+                - generic [ref=f3e238]:
+                  - generic [ref=f3e239]:
+                    - generic [ref=f3e240]: All
+                    - button "Remove" [ref=f3e241]
+                  - combobox "Tool" [ref=f3e245]
+                - button "Clear value" [ref=f3e247]
+          - generic [ref=f3e251]:
+            - generic [ref=f3e252]: Group by
+            - generic [ref=f3e253] [cursor=pointer]:
+              - log [ref=f3e255]
+              - generic [ref=f3e257]:
+                - generic [ref=f3e258]: Tool
+                - combobox "Group by" [ref=f3e260]
+          - generic [ref=f3e264]:
+            - generic [ref=f3e265]: Resolution
+            - generic [ref=f3e266] [cursor=pointer]:
+              - log [ref=f3e268]
+              - generic [ref=f3e270]:
+                - generic [ref=f3e271]: Auto
+                - combobox "Resolution" [ref=f3e273]
+        - generic [ref=f3e277]:
+          - generic "Dashboard content" [ref=f3e278]:
+            - generic [ref=f3e279]:
+              - generic [ref=f3e280]:
+                - 'button "Collapse row Tool categories: ai-context vs MCP vs base" [expanded] [ref=f3e282] [cursor=pointer]':
+                  - generic [ref=f3e285]: "Tool categories: ai-context vs MCP vs base"
+                - generic [ref=f3e290]:
+                  - region [ref=f3e296]:
+                    - heading "ai-context tool calls over time" [level=2] [ref=f3e299]
+                    - generic [ref=f3e304]: No data
+                  - region [ref=f3e312]:
+                    - heading "MCP tool calls over time" [level=2] [ref=f3e315]
+                    - generic [ref=f3e320]: No data
+                  - region [ref=f3e328]:
+                    - heading "Base tool calls over time" [level=2] [ref=f3e331]
+                    - generic [ref=f3e336]: No data
+                  - region [ref=f3e344]:
+                    - heading "Calls by category" [level=2] [ref=f3e347]
+                    - generic [ref=f3e352]: No data
+              - generic [ref=f3e355]:
+                - button "Collapse row Total (all selected projects)" [expanded] [ref=f3e357] [cursor=pointer]:
+                  - generic [ref=f3e360]: Total (all selected projects)
+                - generic [ref=f3e365]:
+                  - region [ref=f3e371]:
+                    - heading "Tool calls (range)" [level=2] [ref=f3e374]
+                  - region [ref=f3e381]:
+                    - heading "Active projects" [level=2] [ref=f3e384]
+                  - region [ref=f3e391]:
+                    - heading "Time spent in tools" [level=2] [ref=f3e394]
+                  - region [ref=f3e405]:
+                    - heading "Avg latency" [level=2] [ref=f3e408]
+                  - region [ref=f3e415]:
+                    - heading "p50 latency" [level=2] [ref=f3e418]
+                  - region [ref=f3e425]:
+                    - heading "p95 latency" [level=2] [ref=f3e428]
+                  - region [ref=f3e435]:
+                    - heading "Tool calls over time by Tool" [level=2] [ref=f3e438]
+                  - region [ref=f3e445]:
+                    - heading "p95 latency by Tool" [level=2] [ref=f3e448]
+                  - region [ref=f3e455]:
+                    - heading "Average latency by Tool" [level=2] [ref=f3e458]
+                  - region [ref=f3e465]:
+                    - heading "Time spent in tools by Tool" [level=2] [ref=f3e468]
+                  - region [ref=f3e479]:
+                    - heading "Per project and tool" [level=2] [ref=f3e482]
+              - generic [ref=f3e484]:
+                - 'button "Collapse row Project: ai-context-opencode-plugin" [expanded] [ref=f3e486] [cursor=pointer]':
+                  - generic [ref=f3e489]: "Project: ai-context-opencode-plugin"
+                - generic [ref=f3e494]:
+                  - region [ref=f3e500]:
+                    - heading "Tool calls (range)" [level=2] [ref=f3e503]
+                  - region [ref=f3e510]:
+                    - heading "p95 latency" [level=2] [ref=f3e513]
+                  - region [ref=f3e520]:
+                    - heading "Calls over time by tool" [level=2] [ref=f3e523]
+                  - region [ref=f3e530]:
+                    - heading "p95 latency by tool" [level=2] [ref=f3e533]
+              - generic [ref=f3e535]:
+                - 'button "Collapse row Project: e2e-direct" [expanded] [ref=f3e537] [cursor=pointer]':
+                  - generic [ref=f3e540]: "Project: e2e-direct"
+                - generic [ref=f3e545]:
+                  - region [ref=f3e551]:
+                    - heading "Tool calls (range)" [level=2] [ref=f3e554]
+                  - region [ref=f3e561]:
+                    - heading "p95 latency" [level=2] [ref=f3e564]
+                  - region [ref=f3e571]:
+                    - heading "Calls over time by tool" [level=2] [ref=f3e574]
+                  - region [ref=f3e581]:
+                    - heading "p95 latency by tool" [level=2] [ref=f3e584]
+          - generic [ref=f3e589]:
+            - button "Export" [ref=f3e590] [cursor=pointer]
+            - button "Outline" [ref=f3e594] [cursor=pointer]
+            - button "Hide" [ref=f3e604] [cursor=pointer]
+  - log [ref=f3e14]

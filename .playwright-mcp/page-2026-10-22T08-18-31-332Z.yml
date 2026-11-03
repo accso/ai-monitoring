@@ -1,0 +1,5 @@
+- generic [ref=f3e3]:
+  - main [ref=f3e7]:
+    - status "Loading" [ref=f3e10]:
+      - img "Grafana" [ref=f3e13]
+  - log [ref=f3e14]

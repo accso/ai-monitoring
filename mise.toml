@@ -1,0 +1,66 @@
+[tasks.up]
+description = "Start the monitoring stack (collector, VictoriaMetrics, Grafana)"
+run = "docker compose up -d --wait"
+
+[tasks.down]
+description = "Stop the monitoring stack (data volumes are kept)"
+run = "docker compose down"
+
+[tasks.logs]
+description = "Follow stack logs"
+run = "docker compose logs -f --tail=100"
+
+[tasks.status]
+description = "Show container status and endpoint health"
+run = """
+docker compose ps
+curl -fsS http://127.0.0.1:8428/health && echo " victoriametrics ok"
+curl -fsS http://127.0.0.1:3000/api/health && echo
+"""
+
+[tasks.reset]
+description = "Stop the stack and DELETE all stored data"
+run = "docker compose down -v"
+
+[tools]
+bun = "1.4.2" # pricing/ only; the OpenCode plugin is runtime-neutral
+node = "22"
+
+[tasks."plugin:install-deps"]
+description = "Install OpenCode plugin dev dependencies"
+dir = "plugins/opencode"
+run = "npm ci"
+
+[tasks."plugin:test"]
+description = "Run OpenCode plugin unit tests (integration tests run too if the stack is up)"
+dir = "plugins/opencode"
+depends = ["plugin:install-deps"]
+run = "npm run typecheck && npm test"
+
+[tasks."plugin:build"]
+description = "Bundle the OpenCode plugin (OpenCode 1 + 2) into dist/ai-monitoring.js"
+dir = "plugins/opencode"
+depends = ["plugin:install-deps"]
+run = "npm run build"
+
+[tasks."plugin:install"]
+description = "Test, build and install the plugin (OpenCode 1 + 2) into ~/.config/opencode/plugins into ~/.config/opencode/plugins (takes effect on next OpenCode session)"
+run = "scripts/install-plugin.sh"
+
+[tasks."plugin:uninstall"]
+description = "Remove the plugin from ~/.config/opencode/plugins"
+run = "scripts/install-plugin.sh --uninstall"
+
+[tasks."pricing:test"]
+description = "Run pricing-sync tests"
+dir = "pricing"
+run = "bun install && bun run typecheck && bun test"
+
+[tasks."pricing:sync"]
+description = "Push price gauges once (the pricing-sync compose service does this continuously)"
+dir = "pricing"
+run = "bun run src/cli.ts"
+
+[tasks."pricing:logs"]
+description = "Follow pricing-sync logs"
+run = "docker compose logs -f --tail=50 pricing-sync"

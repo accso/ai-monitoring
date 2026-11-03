@@ -1,0 +1,125 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch:
+    timeout: 2s
+
+  # GitHub Copilot: normalise spans to the canonical OpenCode-compatible labels
+  transform/copilot:
+    trace_statements:
+      - context: span
+        statements:
+          - set(attributes["gen_ai.provider.name"], "github-copilot") where attributes["gen_ai.operation.name"] == "chat"
+          # Copilot omits usage attributes that are zero; default them so those calls are still counted
+          - set(attributes["gen_ai.usage.cache_read.input_tokens"], 0) where attributes["gen_ai.operation.name"] == "chat" and attributes["gen_ai.usage.input_tokens"] != nil and attributes["gen_ai.usage.cache_read.input_tokens"] == nil
+          - set(attributes["gen_ai.usage.cache_write.input_tokens"], 0) where attributes["gen_ai.operation.name"] == "chat" and attributes["gen_ai.usage.input_tokens"] != nil and attributes["gen_ai.usage.cache_write.input_tokens"] == nil
+          - set(attributes["gen_ai.usage.output_tokens"], 0) where attributes["gen_ai.operation.name"] == "chat" and attributes["gen_ai.usage.input_tokens"] != nil and attributes["gen_ai.usage.output_tokens"] == nil
+          - set(attributes["session_id"], attributes["gen_ai.conversation.id"]) where attributes["gen_ai.conversation.id"] != nil
+
+  # Copilot exports no project info; keep an explicitly configured one (ADR 0016)
+  resource/copilot-project:
+    attributes:
+      - key: project
+        value: github-copilot
+        action: insert
+
+  # Copilot's own token metric lacks cache tokens; the span-derived one replaces it
+  filter/drop-copilot-token-metric:
+    metrics:
+      metric:
+        - 'name == "gen_ai.client.token.usage" and resource.attributes["service.name"] == "github-copilot"'
+
+  delta_to_cumulative: {}
+
+connectors:
+  signal_to_metrics/copilot:
+    spans:
+    - name: gen_ai.client.token.usage
+      unit: "{token}"
+      conditions:
+        - span.attributes["gen_ai.operation.name"] == "chat" and span.attributes["gen_ai.usage.input_tokens"] != nil and span.attributes["gen_ai.usage.output_tokens"] != nil and span.attributes["gen_ai.usage.cache_read.input_tokens"] != nil and span.attributes["gen_ai.usage.cache_write.input_tokens"] != nil
+      attributes:
+        - key: gen_ai.provider.name
+        - key: gen_ai.request.model
+        - key: session_id
+        - key: gen_ai.token.type
+          default_value: input
+      histogram:
+        buckets: [1000000000000.0]
+        value: Int(span.attributes["gen_ai.usage.input_tokens"]) - Int(span.attributes["gen_ai.usage.cache_read.input_tokens"]) - Int(span.attributes["gen_ai.usage.cache_write.input_tokens"])
+    - name: gen_ai.client.token.usage
+      unit: "{token}"
+      conditions:
+        - span.attributes["gen_ai.operation.name"] == "chat" and span.attributes["gen_ai.usage.input_tokens"] != nil and span.attributes["gen_ai.usage.output_tokens"] != nil and span.attributes["gen_ai.usage.cache_read.input_tokens"] != nil and span.attributes["gen_ai.usage.cache_write.input_tokens"] != nil
+      attributes:
+        - key: gen_ai.provider.name
+        - key: gen_ai.request.model
+        - key: session_id
+        - key: gen_ai.token.type
+          default_value: output
+      histogram:
+        buckets: [1000000000000.0]
+        value: Int(span.attributes["gen_ai.usage.output_tokens"])
+    - name: gen_ai.client.token.usage
+      unit: "{token}"
+      conditions:
+        - span.attributes["gen_ai.operation.name"] == "chat" and span.attributes["gen_ai.usage.input_tokens"] != nil and span.attributes["gen_ai.usage.output_tokens"] != nil and span.attributes["gen_ai.usage.cache_read.input_tokens"] != nil and span.attributes["gen_ai.usage.cache_write.input_tokens"] != nil
+      attributes:
+        - key: gen_ai.provider.name
+        - key: gen_ai.request.model
+        - key: session_id
+        - key: gen_ai.token.type
+          default_value: cache_read
+      histogram:
+        buckets: [1000000000000.0]
+        value: Int(span.attributes["gen_ai.usage.cache_read.input_tokens"])
+    - name: gen_ai.client.token.usage
+      unit: "{token}"
+      conditions:
+        - span.attributes["gen_ai.operation.name"] == "chat" and span.attributes["gen_ai.usage.input_tokens"] != nil and span.attributes["gen_ai.usage.output_tokens"] != nil and span.attributes["gen_ai.usage.cache_read.input_tokens"] != nil and span.attributes["gen_ai.usage.cache_write.input_tokens"] != nil
+      attributes:
+        - key: gen_ai.provider.name
+        - key: gen_ai.request.model
+        - key: session_id
+        - key: gen_ai.token.type
+          default_value: cache_write
+      histogram:
+        buckets: [1000000000000.0]
+        value: Int(span.attributes["gen_ai.usage.cache_write.input_tokens"])
+    - name: github.copilot.credits
+      unit: "{credit}"
+      description: Credits reported by Copilot per chat call (nano_aiu / 1e9)
+      conditions:
+        - span.attributes["gen_ai.operation.name"] == "chat" and span.attributes["github.copilot.nano_aiu"] != nil
+      attributes:
+        - key: gen_ai.provider.name
+        - key: gen_ai.request.model
+        - key: session_id
+      sum:
+        value: Double(span.attributes["github.copilot.nano_aiu"]) / 1000000000.0
+        monotonic: true
+
+exporters:
+  otlp_http/victoriametrics:
+    metrics_endpoint: http://victoriametrics:8428/opentelemetry/v1/metrics
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [filter/drop-copilot-token-metric, batch]
+      exporters: [otlp_http/victoriametrics]
+    traces:
+      receivers: [otlp]
+      processors: [resource/copilot-project, transform/copilot]
+      exporters: [signal_to_metrics/copilot]
+    metrics/copilot-derived:
+      receivers: [signal_to_metrics/copilot]
+      processors: [delta_to_cumulative, batch]
+      exporters: [otlp_http/victoriametrics]

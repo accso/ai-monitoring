@@ -1,0 +1,199 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - link "Skip to main content" [ref=e15] [cursor=pointer]:
+      - /url: "#pageContent"
+    - generic [ref=e17]:
+      - generic [ref=e18]:
+        - generic [ref=e19]:
+          - link [ref=e20] [cursor=pointer]:
+            - /url: /
+            - img "Grafana" [ref=e21]
+          - link "Grafana" [ref=e22] [cursor=pointer]:
+            - /url: /
+        - button "Close menu" [ref=e23] [cursor=pointer]
+      - navigation "Navigation" [ref=e26]:
+        - list "Navigation" [ref=e31]:
+          - listitem [ref=e32]:
+            - generic [ref=e33]:
+              - link [ref=e36] [cursor=pointer]:
+                - /url: /dashboards?starred
+                - paragraph [ref=e41]: Starred
+              - 'button "Expand section: Starred" [ref=e43] [cursor=pointer]'
+          - listitem [ref=e46]:
+            - generic [ref=e47]:
+              - link [ref=e50] [cursor=pointer]:
+                - /url: /dashboards
+                - paragraph [ref=e55]: Dashboards
+              - 'button "Expand section: Dashboards" [ref=e57] [cursor=pointer]'
+          - listitem [ref=e60]:
+            - link [ref=e64] [cursor=pointer]:
+              - /url: /explore
+              - paragraph [ref=e69]: Explore
+          - listitem [ref=e70]:
+            - generic [ref=e71]:
+              - link [ref=e74] [cursor=pointer]:
+                - /url: /drilldown
+                - paragraph [ref=e82]: Drilldown
+              - 'button "Expand section: Drilldown" [ref=e84] [cursor=pointer]'
+          - listitem [ref=e87]:
+            - generic [ref=e88]:
+              - link [ref=e91] [cursor=pointer]:
+                - /url: /alerting
+                - paragraph [ref=e96]: Alerting
+              - 'button "Expand section: Alerting" [ref=e98] [cursor=pointer]'
+          - listitem [ref=e101]:
+            - generic [ref=e102]:
+              - link [ref=e105] [cursor=pointer]:
+                - /url: /connections
+                - paragraph [ref=e110]: Connections
+              - 'button "Expand section: Connections" [ref=e112] [cursor=pointer]'
+          - listitem [ref=e115]:
+            - generic [ref=e116]:
+              - link [ref=e119] [cursor=pointer]:
+                - /url: /admin
+                - paragraph [ref=e124]: Administration
+              - 'button "Expand section: Administration" [ref=e126] [cursor=pointer]'
+        - separator [ref=e129]
+        - button "Undock menu" [ref=e131] [cursor=pointer]
+    - banner [ref=e134]:
+      - generic [ref=e135]:
+        - navigation "Breadcrumbs" [ref=e137]:
+          - list [ref=e138]:
+            - listitem [ref=e139]:
+              - link "Dashboards" [ref=e140] [cursor=pointer]:
+                - /url: /dashboards
+            - listitem [ref=e144]:
+              - 'generic "ai-context adapter: tool latency per project" [ref=e145]'
+        - generic [ref=e146]:
+          - generic [ref=e148]:
+            - button "Search..." [ref=e152] [cursor=pointer]
+            - generic [ref=e153]: ⌘+k
+          - button "New" [ref=e155] [cursor=pointer]
+          - button "Help" [ref=e161] [cursor=pointer]
+          - link "Sign in" [ref=e165] [cursor=pointer]:
+            - /url: /d/ai-context-adapter/ai-context-adapter3a-tool-latency-per-project?from=now-7d&to=now&timezone=browser&var-resolution=$__auto&var-project=$__all&var-tool=$__all&var-group=tool&refresh=10s&forceLogin=true
+    - main [ref=e7]:
+      - generic [ref=e167]:
+        - generic [ref=e169]:
+          - generic [ref=e170]:
+            - generic [ref=e171]:
+              - generic [ref=e172]:
+                - button "Move 3d 12h backward" [ref=e173] [cursor=pointer]
+                - 'button "Time range selected: Last 7 days" [ref=e176] [cursor=pointer]':
+                  - generic [ref=e179]: Last 7 days
+                - button "Move time range forwards" [ref=e184] [cursor=pointer]
+                - button "Zoom out time range" [ref=e187] [cursor=pointer]
+              - generic [ref=e190]:
+                - button "Refresh" [ref=e191] [cursor=pointer]
+                - button "Choose refresh time interval with current interval 10 seconds selected" [ref=e197] [cursor=pointer]:
+                  - generic [ref=e198]: 10s
+            - generic [ref=e201]:
+              - generic [ref=e202]:
+                - button "Copy link" [ref=e203] [cursor=pointer]
+                - button "Share" [ref=e206] [cursor=pointer]
+              - button "Enter edit mode" [ref=e209] [cursor=pointer]:
+                - generic [ref=e212]: Edit
+          - generic [ref=e213]:
+            - generic [ref=e214]: Projects
+            - generic [ref=e215] [cursor=pointer]:
+              - log [ref=e217]
+              - generic [ref=e218]:
+                - generic [ref=e219]:
+                  - generic [ref=e220]:
+                    - generic [ref=e221]: All
+                    - button "Remove" [ref=e222]
+                  - combobox "Projects" [ref=e226]
+                - button "Clear value" [ref=e228]
+          - generic [ref=e232]:
+            - generic [ref=e233]: Tool
+            - generic [ref=e234] [cursor=pointer]:
+              - log [ref=e236]
+              - generic [ref=e237]:
+                - generic [ref=e238]:
+                  - generic [ref=e239]:
+                    - generic [ref=e240]: All
+                    - button "Remove" [ref=e241]
+                  - combobox "Tool" [ref=e245]
+                - button "Clear value" [ref=e247]
+          - generic [ref=e251]:
+            - generic [ref=e252]: Group by
+            - generic [ref=e253] [cursor=pointer]:
+              - log [ref=e255]
+              - generic [ref=e257]:
+                - generic [ref=e258]: Tool
+                - combobox "Group by" [ref=e260]
+          - generic [ref=e264]:
+            - generic [ref=e265]: Resolution
+            - generic [ref=e266] [cursor=pointer]:
+              - log [ref=e268]
+              - generic [ref=e270]:
+                - generic [ref=e271]: Auto
+                - combobox "Resolution" [ref=e273]
+        - generic [ref=e277]:
+          - generic "Dashboard content" [ref=e278]:
+            - generic [ref=e279]:
+              - generic [ref=e280]:
+                - button "Collapse row Total (all selected projects)" [expanded] [ref=e282] [cursor=pointer]:
+                  - generic [ref=e285]: Total (all selected projects)
+                - generic [ref=e290]:
+                  - region [ref=e296]:
+                    - heading "Tool calls (range)" [level=2] [ref=e299]
+                    - 'generic "sum(increase(opencode_tool_duration_milliseconds_count{service_name=\"ai-context\",project=~\".*\",tool=~\".*\"}[604800s]))" [ref=e303]': "4"
+                  - region [ref=e312]:
+                    - heading "Active projects" [level=2] [ref=e315]
+                    - 'generic "count(count by (project) (increase(opencode_tool_duration_milliseconds_count{service_name=\"ai-context\",project=~\".*\",tool=~\".*\"}[604800s]) > 0))" [ref=e319]': "2"
+                  - region [ref=e328]:
+                    - heading "Time spent in tools" [level=2] [ref=e331]
+                    - 'generic "sum(increase(opencode_tool_duration_milliseconds_sum{service_name=\"ai-context\",project=~\".*\",tool=~\".*\"}[604800s]))" [ref=e339]': 0.0 ms
+                  - region [ref=e348]:
+                    - heading "Avg latency" [level=2] [ref=e351]
+                    - 'generic "sum(increase(opencode_tool_duration_milliseconds_sum{service_name=\"ai-context\",project=~\".*\",tool=~\".*\"}[604800s])) / sum(increase(opencode_tool_duration_milliseconds_count{service_name=\"ai-context\",project=~\".*\",tool=~\".*\"}[604800s]))" [ref=e355]': 0.0 ms
+                  - region [ref=e364]:
+                    - heading "p50 latency" [level=2] [ref=e367]
+                    - 'generic "histogram_quantile(0.5, sum by (le) (increase(opencode_tool_duration_milliseconds_bucket{service_name=\"ai-context\",project=~\".*\",tool=~\".*\"}[604800s])))" [ref=e371]': 50.0 ms
+                  - region [ref=e380]:
+                    - heading "p95 latency" [level=2] [ref=e383]
+                    - 'generic "histogram_quantile(0.95, sum by (le) (increase(opencode_tool_duration_milliseconds_bucket{service_name=\"ai-context\",project=~\".*\",tool=~\".*\"}[604800s])))" [ref=e387]': 95.0 ms
+                  - region [ref=e396]:
+                    - heading "Tool calls over time by Tool" [level=2] [ref=e399]
+                    - generic [ref=e400]: No data
+                  - region [ref=e408]:
+                    - heading "p95 latency by Tool" [level=2] [ref=e411]
+                    - generic [ref=e412]: No data
+                  - region [ref=e420]:
+                    - heading "Average latency by Tool" [level=2] [ref=e423]
+                    - generic [ref=e424]: No data
+                  - region [ref=e432]:
+                    - heading "Time spent in tools by Tool" [level=2] [ref=e435]
+                    - generic [ref=e440]: No data
+                  - region [ref=e448]:
+                    - heading "Per project and tool" [level=2] [ref=e451]
+              - generic [ref=e453]:
+                - 'button "Collapse row Project: ai-context-opencode-plugin" [expanded] [ref=e455] [cursor=pointer]':
+                  - generic [ref=e458]: "Project: ai-context-opencode-plugin"
+                - generic [ref=e463]:
+                  - region [ref=e469]:
+                    - heading "Tool calls (range)" [level=2] [ref=e472]
+                  - region [ref=e479]:
+                    - heading "p95 latency" [level=2] [ref=e482]
+                  - region [ref=e489]:
+                    - heading "Calls over time by tool" [level=2] [ref=e492]
+                  - region [ref=e499]:
+                    - heading "p95 latency by tool" [level=2] [ref=e502]
+              - generic [ref=e504]:
+                - 'button "Collapse row Project: e2e-direct" [expanded] [ref=e506] [cursor=pointer]':
+                  - generic [ref=e509]: "Project: e2e-direct"
+                - generic [ref=e514]:
+                  - region [ref=e520]:
+                    - heading "Tool calls (range)" [level=2] [ref=e523]
+                  - region [ref=e530]:
+                    - heading "p95 latency" [level=2] [ref=e533]
+                  - region [ref=e540]:
+                    - heading "Calls over time by tool" [level=2] [ref=e543]
+                  - region [ref=e550]:
+                    - heading "p95 latency by tool" [level=2] [ref=e553]
+          - generic [ref=e558]:
+            - button "Export" [ref=e559] [cursor=pointer]
+            - button "Outline" [ref=e563] [cursor=pointer]
+            - button "Hide" [ref=e573] [cursor=pointer]
+  - log [ref=e14]
