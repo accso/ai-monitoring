@@ -114,4 +114,4 @@ export class TokenTracker {
   }
 }
 
-const keyOf = (l: SeriesLabels) => [l.type, l.provider, l.model, l.agent, l.project, l.session_id].join("\u0000")
+export const keyOf = (l: SeriesLabels) => [l.type, l.provider, l.model, l.agent, l.project, l.session_id].join("\u0000")

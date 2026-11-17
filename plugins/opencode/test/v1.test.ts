@@ -28,7 +28,9 @@ const boot = () =>
 const capture = () => {
   const bodies: any[] = []
   globalThis.fetch = (async (_u: any, init: any) => {
-    bodies.push(JSON.parse(init.body))
+    const body = JSON.parse(init.body)
+    const baseline = body.resourceMetrics[0].scopeMetrics[0].metrics[0].histogram.dataPoints.every((d: any) => d.sum === 0)
+    if (!baseline) bodies.push(body)
     return new Response("{}", { status: 200 })
   }) as any
   return bodies

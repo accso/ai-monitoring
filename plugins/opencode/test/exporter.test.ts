@@ -35,11 +35,11 @@ test("otlp flush posts to /v1/metrics and clears dirty state", async () => {
   const ex = new Exporter(cfg, tracker, { fetch: fetchFn as any, instanceId: "i" })
   tracker.record(usage("a", 5))
   await ex.flush()
-  expect(calls).toHaveLength(1)
-  expect(calls[0]!.url).toBe("http://127.0.0.1:4318/v1/metrics")
-  expect(calls[0]!.type).toBe("application/json")
+  expect(calls).toHaveLength(2)
+  expect(calls[1]!.url).toBe("http://127.0.0.1:4318/v1/metrics")
+  expect(calls[1]!.type).toBe("application/json")
   await ex.flush()
-  expect(calls).toHaveLength(1)
+  expect(calls).toHaveLength(2)
 })
 
 test("direct flush posts prometheus text to the import endpoint", async () => {
@@ -101,4 +101,49 @@ test("repeated failures are logged once until an export succeeds", async () => {
   await ex.flush()
   await ex.flush()
   expect(errors.length).toBe(1)
+})
+
+const dps = (body: string) => JSON.parse(body).resourceMetrics[0].scopeMetrics[0].metrics[0].histogram.dataPoints
+
+test("a new series is first exported as a zero baseline so increase() counts its first value", async () => {
+  const bodies: string[] = []
+  const fetchFn = async (_u: any, init: any) => {
+    bodies.push(init.body)
+    return new Response("{}", { status: 200 })
+  }
+  const tracker = new TokenTracker("proj")
+  const ex = new Exporter(resolveConfig({}, {}), tracker, { fetch: fetchFn as any, instanceId: "i" })
+  tracker.record(usage("a", 5))
+  await ex.flush()
+  expect(bodies).toHaveLength(2)
+  const [base, real] = [dps(bodies[0]!), dps(bodies[1]!)]
+  expect(base).toHaveLength(1)
+  expect(base[0].sum).toBe(0)
+  expect(base[0].count).toBe("0")
+  expect(real[0].sum).toBe(5)
+  expect(BigInt(base[0].timeUnixNano)).toBeLessThan(BigInt(real[0].timeUnixNano))
+
+  tracker.record(usage("a", 9))
+  await ex.flush()
+  expect(bodies).toHaveLength(3)
+  expect(dps(bodies[2]!)[0].sum).toBe(9)
+})
+
+test("direct transport writes the baseline with an earlier timestamp in the same body", async () => {
+  const bodies: string[] = []
+  const fetchFn = async (_u: any, init: any) => {
+    bodies.push(init.body)
+    return new Response(null, { status: 204 })
+  }
+  const tracker = new TokenTracker("proj")
+  const ex = new Exporter(resolveConfig({ AI_MONITORING_TRANSPORT: "direct" }, {}), tracker, { fetch: fetchFn as any, instanceId: "i" })
+  tracker.record(usage("a", 5))
+  await ex.flush()
+  expect(bodies).toHaveLength(1)
+  const sums = bodies[0]!.split("\n").filter((l) => l.startsWith("gen_ai_client_token_usage_sum"))
+  const parse = (l: string) => l.replace(/^.*\} /, "").split(" ").map(Number) as [number, number]
+  const [a, b] = sums.map(parse)
+  expect(a![0]).toBe(0)
+  expect(b![0]).toBe(5)
+  expect(a![1]).toBeLessThan(b![1])
 })

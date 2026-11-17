@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+- Fix: a new series is first exported as a `0` sample 1 ms before its first real value. VictoriaMetrics' `increase()` ignores the first sample of a new counter series when it is large, so dashboards under-counted cache_write and input tokens (about 20% of cache_write cost on 2026-11-16 vs. the Anthropic console). Both transports (`otlp` sends one extra request per flush that contains new series, `direct` adds the lines to the same body).
+
 ## 0.3.0
 
 - New label `gen_ai.agent.name` (`gen_ai_agent_name`) on `gen_ai.client.token.usage`: OpenCode 1 from `info.agent ?? info.mode`, OpenCode 2 from `session.step.started.agent` (compaction: `compaction`). `unknown` when not reported. Subagents appear under their own agent name.
